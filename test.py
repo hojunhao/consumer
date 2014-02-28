@@ -1,0 +1,1 @@
+print u'\u2019'.encode('UTF-8')

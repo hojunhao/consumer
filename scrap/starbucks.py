@@ -25,8 +25,6 @@ def getAreaPage(url):
             name = re.search(r'-(.*?)\.', l).group(1)
             areas.append((name, l))
     return areas 
-#print getAreaPage(links)
-#[('cbd', 'stores-cbd.html'), ('east', 'stores-east.html'), ('orchard', 'stores-orchard.html'),  ......
 
 def getPageContent(url):
     r = requests.get(url)
@@ -42,11 +40,6 @@ def getPageContent(url):
         rows.append(content)
     return rows #output in list of BS tags not formatted
 
-
-
-testcell = getPageContent('http://www.starbucks.com.sg/stores-east.html')[0][0]
-#print testcell
-
 def formatCell(cell):
     breaks = cell.findAll('br')
     if len(breaks)>0:
@@ -54,8 +47,6 @@ def formatCell(cell):
     return cell.getText(separator ="\n", strip=True)
 # 80, Airport Boulevard Unit No: #01-06 Terminal 1 Arrival hall Central Singapore 819642 Tel: 6546 7696
 
-# address = formatCell(testcell)
-# print address
 
 def getPostal(str):
     result = re.search(r'Singapore.*?([0-9]{6})', str)
@@ -63,8 +54,6 @@ def getPostal(str):
         return result.group(1)
     else:
         return ""
-#819642
-#print getPostal(formatCell(getPageContent('http://www.starbucks.com.sg/stores-east.html')[0][1]))
 
 #get a list of tuples of pages to scrap in accordance to areas
 pages = getAreaPage(url)
