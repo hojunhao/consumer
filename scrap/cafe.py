@@ -14,7 +14,6 @@ r = requests.get(url)
 html = r.text
 soup = BS(html)
 
-print soup.originalEncoding
 
 # blog content
 content = soup.find('div', class_="entry clear-block")
@@ -35,5 +34,7 @@ for i in cafelist:
 csvfilepath = datadir+'\cafe.csv'
 with open(csvfilepath, 'wb') as f:
     for i in info:
-        line = i[0].encode('ascii', 'ignore')+','+i[1].encode('ascii', 'ignore')+'\n'
+        line = i[0].encode('ascii', 'ignore')+',"'+i[1].encode('ascii', 'ignore')+'"\n'
         f.write(line)
+        
+print "Completed"
